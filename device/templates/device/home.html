@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1>{{ user.role }}</h1>
+    <hr>
+
+<a href="yandexmaps://maps.yandex.ru/?ll=37.62,55.75&z=12">Click here for route maps</a>
+<a href=https://yandex.ru/maps/?ll=46.114499,33.701412&pt=46.114499,33.701412&z=18&l=map">Click here for route maps</a>
+{#    {% if user.is_authenticated %}#}
+{#        <a href="{% url 'logout' %}">Logout</a>#}
+{#    {% else %}#}
+{#        <a href="{% url 'login' %}">Login</a> |#}
+{#        <a href="{% url 'register' %}">Register</a>#}
+{#    {% endif %}#}
+{% endblock %}
