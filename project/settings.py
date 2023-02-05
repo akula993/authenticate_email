@@ -24,11 +24,17 @@ SECRET_KEY = 'django-insecure-i^zl6tox_sqq&j_oa^o*a$v0zz&29d^*=7d01wc)pp!51)y9im
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = 'device'
 LOGOUT_REDIRECT_URL = '/'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'akula993@gmail.com'
+EMAIL_HOST_PASSWORD = 'wpqnmaapzcgodklf'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -43,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'device.apps.DeviceConfig',
+    'shop.apps.ShopConfig',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -60,9 +68,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates',
-                 # 'device/templates',
-                 ],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,8 +126,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_DIRS = [BASE_DIR / 'users/static_src', ]
+# STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [BASE_DIR /
+                    'shop/static_src',
+                    'users/static_src',
+                    ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
