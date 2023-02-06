@@ -1,7 +1,17 @@
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from django import forms
 from django.contrib import admin
 from django.template.defaultfilters import slugify
 
 from shop.models import Product, Gallery
+
+
+class ProductAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Product
+        fields = '__all__'
 
 
 class GalleryInline(admin.StackedInline):
@@ -28,6 +38,7 @@ class ProductAdmin(admin.ModelAdmin):
     save_on_top = True
     exclude = ['slug', 'view']
     readonly_fields = ('slug', 'view')
+    form = ProductAdminForm
 
 
 @admin.register(Gallery)

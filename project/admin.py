@@ -1,0 +1,3 @@
+
+
+# Define a new FlatPageAdmin
