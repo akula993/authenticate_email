@@ -1,0 +1,33 @@
+<section class="blog py-lg-4 py-md-3 py-sm-3 py-3">
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <h3 class="title clr text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Новые поступления</h3>
+        <div class="slid-img">
+            <ul id="flexiselDemo1">
+                {% for product in latest_product %}
+                    <li>
+                        <div class="agileinfo_port_grid">
+
+                            {% if product.gallery %}
+                                {% for img in product.gallery.all|slice:1 %}
+                                    <img src="{{ img.image.url }}" class="img-fluid" alt="" >
+
+                                {% endfor %}
+
+                            {% else %}
+                                <img src="https://aistenok76.ru/upload/iblock/7de/7debef50bffd656f5357dc0447a281df.jpg"
+                                     class="img-fluid" alt="">
+                            {% endif %}
+                            <div class="banner-right-icon">
+                                <h4 class="pt-3">{{ product.title }}</h4>
+                            </div>
+                            <div class="outs_more-buttn">
+                                <a href="shop.html">Купить?</a>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+</section>

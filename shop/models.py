@@ -31,7 +31,7 @@ class Product(models.Model):
     status = models.CharField(max_length=10,
                               choices=STATUS_CHOICES,
                               default='draft')
-    view = models.IntegerField(verbose_name='Просмотры', )
+    view = models.IntegerField(verbose_name='Просмотры', default=0)
     objects = models.Manager()  # The default manager.
     published = PublishedManager()  # Our custom manager.
     tags = TaggableManager()
@@ -41,6 +41,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f'{self.publish.day}{self.id}{self.publish.month}{self.id}{self.publish.year}')
+        super(Product, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('blog:post_detail',
@@ -57,7 +61,7 @@ def product_directory_path(instance, filename):
 
 class Gallery(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='gallery')
-    slug = models.SlugField(max_length=260, unique=True,)
+    slug = models.SlugField(max_length=260, unique=True, )
     image = models.ImageField(verbose_name='Изображение', upload_to=product_directory_path)
 
     def save(self, *args, **kwargs):
